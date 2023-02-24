@@ -7,16 +7,16 @@ type ActionType = RemoveTaskType | AddTaskType | ChangeTaskStatus | ChangeTaskTi
     | AddTodolistACType | RemoveTodolistACType
 
 const initialState: TasksStateType = {
-    [todolistId1]: [
-        {id: v1(), title: "HTML", isDone: true},
-        {id: v1(), title: "TS", isDone: true},
-        {id: v1(), title: "React", isDone: false}
-    ],
-    [todolistId2]: [
-        {id: v1(), title: "1984", isDone: true},
-        {id: v1(), title: "Fahrenheit 451", isDone: true},
-        {id: v1(), title: "All Quiet on the Western Front", isDone: true},
-    ]
+    // [todolistId1]: [
+    //     {id: v1(), title: "HTML", isDone: true},
+    //     {id: v1(), title: "TS", isDone: true},
+    //     {id: v1(), title: "React", isDone: false}
+    // ],
+    // [todolistId2]: [
+    //     {id: v1(), title: "1984", isDone: true},
+    //     {id: v1(), title: "Fahrenheit 451", isDone: true},
+    //     {id: v1(), title: "All Quiet on the Western Front", isDone: true},
+    // ]
 }
 
 export const tasksReducer = (state: TasksStateType = initialState, action: ActionType): TasksStateType => {
@@ -79,9 +79,8 @@ export const removeTaskAC = (todolistId: string,taskId: string ) => {
     return {
         type: 'REMOVE-TASK',
         payload: {
-            taskId,
             todolistId,
-
+            taskId,
         }
     } as const
 }

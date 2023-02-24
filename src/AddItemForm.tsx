@@ -1,12 +1,13 @@
-import React, {ChangeEvent, KeyboardEvent, useState} from "react";
+import React, {ChangeEvent, KeyboardEvent, useCallback, useState} from "react";
 import {Button} from "@mui/material";
 
 type AddItemFormType = {
-    callback: ( title: string) => void
+    callback: (title: string) => void
 
 }
 
-export const AddItemForm = (props: AddItemFormType) => {
+export const AddItemForm = React.memo((props: AddItemFormType) => {
+    console.log('AddItem')
     let [newTaskTitle, setNewTaskTitle] = useState("");
     let [error, setError] = useState<string | null>(null)
 
@@ -15,7 +16,9 @@ export const AddItemForm = (props: AddItemFormType) => {
     }
 
     const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
-        setError(null)
+        if (error !== null) {
+            setError(null)
+        }
         if (e.ctrlKey && e.charCode === 13) {
             addTask()
             setNewTaskTitle("")
@@ -24,7 +27,7 @@ export const AddItemForm = (props: AddItemFormType) => {
 
     const addTask = () => {
         if (newTaskTitle.trim() !== "") {
-            props.callback( newTaskTitle.trim())
+            props.callback(newTaskTitle.trim())
             setNewTaskTitle("")
         } else {
             setError("Error")
@@ -44,4 +47,4 @@ export const AddItemForm = (props: AddItemFormType) => {
             {error && <div className="error-message">{error}</div>}
         </div>
     )
-}
+})

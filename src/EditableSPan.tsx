@@ -1,13 +1,16 @@
-import React, {ChangeEvent, useState} from 'react';
+import React, {ChangeEvent, useCallback, useState} from 'react';
 
 type  EditableSPanType = {
     oldTitle: string
     callback: (newTitle: string) => void
 
 }
-export const EditableSPan = (props: EditableSPanType) => {
+export const EditableSPan = React.memo((props: EditableSPanType) => {
+    console.log('Edit')
+
     const [edit, setEdit] = useState(false)
     const [newTitle, setNewTitle] = useState(props.oldTitle)
+
     const onBlurHandler = () => {
         setEdit(!edit)
         addTask()
@@ -26,5 +29,5 @@ return (
         ? <input value={newTitle} onBlur={onBlurHandler} onChange={onChangeHandler} autoFocus/>
         : <span onDoubleClick={onBlurHandler}>{props.oldTitle}</span>
 );
-}
+})
 
